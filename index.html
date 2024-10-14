@@ -6,10 +6,10 @@
 </head>
 <body>
 
-    
-<h1>欢迎来到黄阳涛的世界!</h1>
+    <h1>欢迎来到黄阳涛的世界!</h1>
 <!-- 背景音乐 -->
 <audio id="backgroundAudio" loop>
+    <source src="See You again.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
 <button onclick="playPreviousSong()">前一首</button>
@@ -20,19 +20,18 @@
 // 歌曲列表
 var songs = [
     { src: "See You again.mp3", type: "audio/mpeg" },
-    // 添加更多歌曲对象
-    // { src: "其实都没有.mp3", type: "audio/mpeg" },
-    // { src: "再见只是陌生人-半吨兄弟.mp3", type: "audio/mpeg" },
-    // { src: "十年 - 陈奕迅.mp3", type: "audio/mpeg" },
-    // { src: "大城小爱 - 王力宏.mp3", type: "audio/mpeg" },
-    // { src: "安和桥-宋冬野.mp3", type: "audio/mpeg" },
-    // { src: "心中的日月 - 王力宏.mp3", type: "audio/mpeg" },
-    // { src: "改变自己-王力宏.mp3", type: "audio/mpeg" },
-    // { src: "消愁-毛不易.320.mp3", type: "audio/mpeg" },
-    // { src: "缘分一道桥-王力宏,谭维维.320.mp3", type: "audio/mpeg" },
-    // { src: "若是月亮还没来.mp3", type: "audio/mpeg" },
-    // { src: "葡萄成熟时 - 陈奕迅.mp3", type: "audio/mpeg" },
-    // { src: "需要人陪-王力宏.mp3", type: "audio/mpeg" },
+    { src: "其实都没有.mp3", type: "audio/mpeg" },
+    { src: "再见只是陌生人-半吨兄弟.mp3", type: "audio/mpeg" },
+    { src: "十年 - 陈奕迅.mp3", type: "audio/mpeg" },
+    { src: "大城小爱 - 王力宏.mp3", type: "audio/mpeg" },
+    { src: "安和桥-宋冬野.mp3", type: "audio/mpeg" },
+    { src: "心中的日月 - 王力宏.mp3", type: "audio/mpeg" },
+    { src: "改变自己-王力宏.mp3", type: "audio/mpeg" },
+    { src: "消愁-毛不易.320.mp3", type: "audio/mpeg" },
+    { src: "缘分一道桥-王力宏,谭维维.320.mp3", type: "audio/mpeg" },
+    { src: "若是月亮还没来.mp3", type: "audio/mpeg" },
+    { src: "葡萄成熟时 - 陈奕迅.mp3", type: "audio/mpeg" },
+    { src: "需要人陪-王力宏.mp3", type: "audio/mpeg" },
 ];
 
 // 当前歌曲索引
@@ -40,13 +39,10 @@ var currentSongIndex = 0;
 
 function playBackgroundMusic() {
     var audio = document.getElementById('backgroundAudio');
-    var playButton = document.getElementById('playBackgroundMusic');
     if (audio.paused) {
         audio.play();
-        playButton.textContent = '暂停音乐';
     } else {
         audio.pause();
-        playButton.textContent = '播放音乐';
     }
 }
 
@@ -59,11 +55,10 @@ function playNextSong() {
 }
 
 function playRandomSong() {
-    var randomIndex = Math.floor(Math.random() * songs.length);
-    // 确保不会重复播放同一首歌曲
-    while (randomIndex === currentSongIndex) {
+    var randomIndex;
+    do {
         randomIndex = Math.floor(Math.random() * songs.length);
-    }
+    } while (randomIndex === currentSongIndex);
     currentSongIndex = randomIndex;
     playSong(songs[randomIndex]);
 }
@@ -71,41 +66,38 @@ function playRandomSong() {
 function playSong(song) {
     var audio = document.getElementById('backgroundAudio');
     audio.src = song.src;
-    audio.type = song.type;
     audio.play();
-    // 更新播放/暂停按钮文本
-    document.getElementById('playBackgroundMusic').textContent = '暂停音乐';
 }
 
-// 初始化播放第一首歌曲
+// 初始化播放一首歌曲
 window.onload = function() {
     playRandomSong();
 };
 </script>
 
-    
 <style>
 button {
-    padding: 10px 20px; /* 按钮内边距 */
-    font-size: 16px; /* 文字大小 */
-    cursor: pointer; /* 鼠标悬停时显示指针 */
-    background-color: #4CAF50; /* 按钮背景颜色 */
-    color: white; /* 文字颜色 */
-    border: none; /* 无边框 */
-    border-radius: 5px; /* 圆角边框 */
-    outline: none; /* 点击时无轮廓 */
-    transition: background-color 0.3s; /* 背景色变化动画 */
-    margin: 5px; /* 外边距 */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.3s;
+    margin: 5px;
 }
 
 button:hover {
-    background-color: #45a049; /* 鼠标悬停时的背景颜色 */
+    background-color: #45a049;
 }
 
 button:active {
-    background-color: #397d3a; /* 按钮被按下时的背景颜色 */
+    background-color: #397d3a;
 }
 </style>
+
     
     <h2>获奖荣誉</h2>
 <ul>
