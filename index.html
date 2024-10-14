@@ -17,31 +17,23 @@
 <button onclick="playNextSong()">后一首</button>
 
 <script>
+
     
 // 歌曲列表
 var songs = [
     { src: "See You again.mp3", type: "audio/mpeg" },
-    // 添加更多歌曲对象
-    // { src: "其实都没有.mp3", type: "audio/mpeg" },
-    // { src: "再见只是陌生人-半吨兄弟.mp3", type: "audio/mpeg" },
-    // { src: "十年 - 陈奕迅.mp3", type: "audio/mpeg" },
-    // { src: "大城小爱 - 王力宏.mp3", type: "audio/mpeg" },
-    // { src: "安和桥-宋冬野.mp3", type: "audio/mpeg" },
-    // { src: "心中的日月 - 王力宏.mp3", type: "audio/mpeg" },
-    // { src: "改变自己-王力宏.mp3", type: "audio/mpeg" },
-    // { src: "消愁-毛不易.320.mp3", type: "audio/mpeg" },
-    // { src: "缘分一道桥-王力宏,谭维维.320.mp3", type: "audio/mpeg" },
-    // { src: "若是月亮还没来.mp3", type: "audio/mpeg" },
-    // { src: "葡萄成熟时 - 陈奕迅.mp3", type: "audio/mpeg" },
-    // { src: "需要人陪-王力宏.mp3", type: "audio/mpeg" },
-    // { src: "", type: "audio/mpeg" },
-    // { src: "", type: "audio/mpeg" },
-    // { src: "", type: "audio/mpeg" },
-    // { src: "", type: "audio/mpeg" },
-    // { src: "", type: "audio/mpeg" },
-    // { src: "", type: "audio/mpeg" },
-    // { src: "", type: "audio/mpeg" },
-    // { src: "", type: "audio/mpeg" }
+    { src: "其实都没有.mp3", type: "audio/mpeg" },
+    { src: "再见只是陌生人-半吨兄弟.mp3", type: "audio/mpeg" },
+    { src: "十年 - 陈奕迅.mp3", type: "audio/mpeg" },
+    { src: "大城小爱 - 王力宏.mp3", type: "audio/mpeg" },
+    { src: "安和桥-宋冬野.mp3", type: "audio/mpeg" },
+    { src: "心中的日月 - 王力宏.mp3", type: "audio/mpeg" },
+    { src: "改变自己-王力宏.mp3", type: "audio/mpeg" },
+    { src: "消愁-毛不易.320.mp3", type: "audio/mpeg" },
+    { src: "缘分一道桥-王力宏,谭维维.320.mp3", type: "audio/mpeg" },
+    { src: "若是月亮还没来.mp3", type: "audio/mpeg" },
+    { src: "葡萄成熟时 - 陈奕迅.mp3", type: "audio/mpeg" },
+    { src: "需要人陪-王力宏.mp3", type: "audio/mpeg" },
 ];
 
 // 当前歌曲索引
@@ -49,38 +41,42 @@ var currentSongIndex = 0;
 
 function playBackgroundMusic() {
     var audio = document.getElementById('backgroundAudio');
-    var playButton = document.getElementById('playBackgroundMusic');
     if (audio.paused) {
         audio.play();
-        playButton.textContent = '暂停音乐';
     } else {
         audio.pause();
-        playButton.textContent = '播放音乐';
     }
 }
 
 function playPreviousSong() {
-    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-    playSong(songs[currentSongIndex]);
+    playRandomSong();
 }
 
 function playNextSong() {
-    currentSongIndex = (currentSongIndex + 1) % songs.length;
-    playSong(songs[currentSongIndex]);
+    playRandomSong();
+}
+
+function playRandomSong() {
+    var randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * songs.length);
+    } while (randomIndex === currentSongIndex);
+    currentSongIndex = randomIndex;
+    playSong(songs[randomIndex]);
 }
 
 function playSong(song) {
     var audio = document.getElementById('backgroundAudio');
     audio.src = song.src;
-    audio.type = song.type;
     audio.play();
-    // 更新播放/暂停按钮文本
-    document.getElementById('playBackgroundMusic').textContent = '暂停音乐';
 }
 
-// 初始化播放第一首歌曲
-playSong(songs[currentSongIndex]);
+// 初始化播放一首歌曲
+window.onload = function() {
+    playRandomSong();
+};
 </script>
+
 
 <style>
 button {
