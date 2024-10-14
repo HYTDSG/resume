@@ -1,9 +1,21 @@
 <h1>欢迎来到黄阳涛的世界!</h1>
 <!-- 背景音乐 -->
-<audio autoplay loop>
+<audio id="backgroundAudio" loop>
     <source src="See You again.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
+<button onclick="playBackgroundMusic()">播放背景音乐</button>
+
+<script>
+function playBackgroundMusic() {
+    var audio = document.getElementById('backgroundAudio');
+    if (audio.paused) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
+}
+</script>
 
 <h1>我的项目经历</h1>
 
