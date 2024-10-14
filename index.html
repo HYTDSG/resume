@@ -6,24 +6,85 @@
 </head>
 <body>
 
+    
 <h1>欢迎来到黄阳涛的世界!</h1>
 <!-- 背景音乐 -->
 <audio id="backgroundAudio" loop>
-    <source src="See You again.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
-<button onclick="playBackgroundMusic()">播放音乐</button>
+<button onclick="playPreviousSong()">前一首</button>
+<button onclick="playBackgroundMusic()">播放/暂停</button>
+<button onclick="playNextSong()">后一首</button>
 
 <script>
+// 歌曲列表
+var songs = [
+    { src: "See You again.mp3", type: "audio/mpeg" },
+    // 添加更多歌曲对象
+    // { src: "song2.mp3", type: "audio/mpeg" },
+    // { src: "song3.mp3", type: "audio/mpeg" }
+];
+
+// 当前歌曲索引
+var currentSongIndex = 0;
+
 function playBackgroundMusic() {
     var audio = document.getElementById('backgroundAudio');
+    var playButton = document.getElementById('playBackgroundMusic');
     if (audio.paused) {
         audio.play();
+        playButton.textContent = '暂停音乐';
     } else {
         audio.pause();
+        playButton.textContent = '播放音乐';
     }
 }
+
+function playPreviousSong() {
+    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+    playSong(songs[currentSongIndex]);
+}
+
+function playNextSong() {
+    currentSongIndex = (currentSongIndex + 1) % songs.length;
+    playSong(songs[currentSongIndex]);
+}
+
+function playSong(song) {
+    var audio = document.getElementById('backgroundAudio');
+    audio.src = song.src;
+    audio.type = song.type;
+    audio.play();
+    // 更新播放/暂停按钮文本
+    document.getElementById('playBackgroundMusic').textContent = '暂停音乐';
+}
+
+// 初始化播放第一首歌曲
+playSong(songs[currentSongIndex]);
 </script>
+
+<style>
+button {
+    padding: 10px 20px; /* 按钮内边距 */
+    font-size: 16px; /* 文字大小 */
+    cursor: pointer; /* 鼠标悬停时显示指针 */
+    background-color: #4CAF50; /* 按钮背景颜色 */
+    color: white; /* 文字颜色 */
+    border: none; /* 无边框 */
+    border-radius: 5px; /* 圆角边框 */
+    outline: none; /* 点击时无轮廓 */
+    transition: background-color 0.3s; /* 背景色变化动画 */
+    margin: 5px; /* 外边距 */
+}
+
+button:hover {
+    background-color: #45a049; /* 鼠标悬停时的背景颜色 */
+}
+
+button:active {
+    background-color: #397d3a; /* 按钮被按下时的背景颜色 */
+}
+</style>
 
 
     <h2>获奖荣誉</h2>
