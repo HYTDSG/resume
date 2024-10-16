@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>黄阳涛的简历</title>
+    
+    <!-- 引入Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* 你之前的样式代码 */
+        .music-icon {
+            font-size: 24px; /* 设置图标大小 */
+            color: #0055A4; /* 设置图标颜色 */
+            cursor: pointer; /* 鼠标悬停时显示指针 */
+            margin-right: 10px; /* 与文本或其他元素的间距 */
+        }
+    </style>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
-
         body {
             font-family: 'Noto Sans JP', sans-serif;
             background: linear-gradient(to right, #ffecd2, #b4a7d6); /* 渐变背景 */
@@ -15,7 +27,6 @@
             padding: 20px;
             line-height: 1.6;
         }
-
         .container {
             background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
             padding: 30px;
@@ -24,32 +35,27 @@
             max-width: 800px;
             margin: 50px auto; /* 增加上下边距 */
         }
-
         h1 {
             font-size: 2.5em; /* 增大标题字体大小 */
             color: #333; /* 标题颜色 */
             text-align: center;
             margin-bottom: 0.5em; /* 增加下边距 */
         }
-
         .section-title {
             text-align: center;
             color: #0055A4; /* 标题颜色 */
             font-size: 1.8em; /* 增大标题字体大小 */
             margin-bottom: 0.5em; /* 增加下边距 */
         }
-
         ul {
             padding: 0;
             list-style: none;
             font-size: 1.2em; /* 增大字体大小 */
         }
-
         ul li {
             padding: 8px 0;
             border-bottom: 1px solid #eee;
         }
-
         .card {
             background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
             padding: 20px;
@@ -57,7 +63,6 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         .btn {
             display: inline-block;
             background: #0055A4; /* 按钮颜色 */
@@ -69,18 +74,15 @@
             margin: 10px 0;
             font-size: 1em; /* 调整按钮字体大小 */
         }
-
         .btn:hover {
             background: #87CEFA; /* 按钮悬停颜色 */
         }
-
         @media (max-width: 768px) {
             .container {
                 width: auto;
                 padding: 15px;
             }
         }
-
         @media print {
             body {
                 background: none;
