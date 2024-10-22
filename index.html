@@ -10,23 +10,28 @@
     
 
           <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
-        body {
+                      body {
             font-family: 'Noto Sans JP', sans-serif;
-            background: linear-gradient(to right, #ffecd2, #b4a7d6); /* 渐变背景 */
-            color: #333; /* 主文本颜色 */
             margin: 0;
             padding: 20px;
             line-height: 1.6;
+            background: linear-gradient(to right, #ffecd2, #b4a7d6); /* 初始渐变背景 */
+            color: #333;
+            transition: background 0.5s ease-in-out; /* 平滑过渡效果 */
         }
         .container {
-            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            background: rgba(255, 255, 255, 0.8);
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 800px;
-            margin: 50px auto; /* 增加上下边距 */
+            margin: 50px auto;
         }
+        /* 其他样式保持不变 */
+
+
+
+
         h1 {
             font-size: 2.5em; /* 增大标题字体大小 */
             color: #333; /* 标题颜色 */
