@@ -94,16 +94,18 @@
     <div class="container">
         
         <h1>欢迎来到黄阳涛的世界!</h1>
+<!-- 音乐图标 -->
+<i class="fa-solid fa-music fa-2x"></i> <!-- Font Awesome 6 使用 solid 前缀，fa-2x 使图标放大2倍 -->
+<!-- 背景音乐 -->
+<audio id="backgroundAudio" loop>
+    <source src="See You again.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<button onclick="playPreviousSong()">前一首</button>
+<button onclick="playBackgroundMusic()">播放/暂停</button>
+<button onclick="playNextSong()">后一首</button>
 
-<!-- 音乐播放器和图标 -->
-<div style="text-align: center; margin-top: 20px;">
-    <!-- 音乐图标 -->
-    <i class="fa-solid fa-music fa-2x" style="margin-right: 10px;"></i> <!-- Font Awesome 6 使用 solid 前缀，fa-2x 使图标放大2倍 -->
-    <!-- 播放按钮 -->
-    <button onclick="playPreviousSong()">前一首</button>
-    <button onclick="playBackgroundMusic()">播放/暂停</button>
-    <button onclick="playNextSong()">后一首</button>
-</div>
+
 
 <script>
 
