@@ -105,6 +105,97 @@
             <li><a href="#">关于我们</a></li>
         </ul>
     </nav>
+        /* 编写 CSS 样式来美化页面，使其更接近目标网站的视觉效果。*/
+/* styles.css */
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: linear-gradient(to right, #ffecd2, #b4a7d6);
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.music-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.music-item {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.music-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.music-info {
+    flex-grow: 1;
+}
+
+.play-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.music-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.player-controls button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+
+        
         <h1>欢迎参观!</h1>
 
 
