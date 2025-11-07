@@ -96,9 +96,7 @@
     <div class="container">
 
         <h1>欢迎光顾!</h1>
-        
- 
-         
+
 
 <!-- 音乐播放器容器 -->
 <div style="text-align: center; margin-top: 20px;">
@@ -140,78 +138,93 @@ var songs = [
     { src: "林俊杰 - 美人鱼.mp3.mp3", type: "audio/mpeg" },
 ];
  
+// 当前歌曲索引
+var currentSongIndex = 0;
 
-        // 当前歌曲索引
-        var currentSongIndex = 0;
+function playBackgroundMusic() {
+    var audio = document.getElementById('backgroundAudio');
+    if (audio.paused) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
+}
 
-        // 获取音频元素
-        var audio = document.getElementById('backgroundAudio');
+function playPreviousSong() {
+    playRandomSong();
+}
 
-        // 播放/暂停背景音乐
-        function playBackgroundMusic() {
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-        }
+function playNextSong() {
+    playRandomSong();
+}
 
-        // 播放上一首 - 修改为顺序播放
-        function playPreviousSong() {
-            // 顺序播放逻辑：索引减1，如果小于0则循环到最后一首
-            currentSongIndex--;
-            if (currentSongIndex < 0) {
-                currentSongIndex = songs.length - 1;
-            }
-            playSong(songs[currentSongIndex]);
-        }
+function playRandomSong() {
+    var randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * songs.length);
+    } while (randomIndex === currentSongIndex);
+    currentSongIndex = randomIndex;
+    playSong(songs[randomIndex]);
+}
 
-        // 播放下一首 - 修改为顺序播放
-        function playNextSong() {
-            // 顺序播放逻辑：索引加1，如果超过歌曲列表长度则循环到第一首
-            currentSongIndex++;
-            if (currentSongIndex >= songs.length) {
-                currentSongIndex = 0;
-            }
-            playSong(songs[currentSongIndex]);
-        }
+function playSong(song) {
+    var audio = document.getElementById('backgroundAudio');
+    audio.src = song.src;
+    audio.play();
+}
 
-        // 播放随机歌曲（仅用于初始化第一首歌）
-        function playRandomSong() {
-            // 生成随机索引，确保不与当前歌曲相同（虽然初始化时当前索引为0）
-            var randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * songs.length);
-            } while (randomIndex === currentSongIndex);
-            
-            // 更新当前歌曲索引
-            currentSongIndex = randomIndex;
-            
-            // 播放随机选择的歌曲
-            playSong(songs[randomIndex]);
-        }
+// 初始化播放一首歌曲
+window.onload = function() {
+    playRandomSong();
+};
+</script>
 
-        // 播放指定歌曲
-        function playSong(song) {
-            // 设置音频源
-            audio.src = song.src;
-            
-            // 播放音频
-            audio.play();
-        }
 
-        // 初始化播放器
-        function initPlayer() {
-            // 随机选择第一首歌
-            playRandomSong();
-            
-            // 添加歌曲结束事件监听，自动播放下一首
-            audio.addEventListener('ended', playNextSong);
-        }
+<style>
+button {
+    padding: 10px 20px; /* 按钮内边距 */
+    font-size: 16px; /* 文字大小 */
+    cursor: pointer; /* 鼠标悬停时显示指针 */
+    background-color: #4CAF50; /* 按钮背景颜色 */
+    color: white; /* 文字颜色 */
+    border: none; /* 无边框 */
+    border-radius: 5px; /* 圆角边框 */
+    outline: none; /* 点击时无轮廓 */
+    transition: background-color 0.3s; /* 背景色变化动画 */
+    margin: 5px; /* 外边距 */
+}
 
-        // 页面加载完成后初始化播放器
-        window.onload = initPlayer;
-    </script>
+button:hover {
+    background-color: #45a049; /* 鼠标悬停时的背景颜色 */
+}
+
+button:active {
+    background-color: #397d3a; /* 按钮被按下时的背景颜色 */
+}
+</style>
+<style>
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.3s;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    background-color: #397d3a;
+}
+</style>
+
 
 
  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
