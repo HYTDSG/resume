@@ -141,12 +141,17 @@ var songs = [
     { src: "林俊杰 - 美人鱼.mp3.mp3", type: "audio/mpeg" },
 ];
 
-
         // 当前歌曲索引
         var currentSongIndex = 0;
 
         // 获取音频元素
         var audio = document.getElementById('backgroundAudio');
+        var songTitle = document.getElementById('songTitle');
+        var songArtist = document.getElementById('songArtist');
+        var progressBar = document.getElementById('progressBar');
+        var progress = document.getElementById('progress');
+        var currentTimeEl = document.getElementById('currentTime');
+        var durationEl = document.getElementById('duration');
 
         // 播放/暂停背景音乐
         function playBackgroundMusic() {
@@ -157,7 +162,7 @@ var songs = [
             }
         }
 
-        // 播放上一首 - 修改为顺序播放
+        // 播放上一首 - 顺序播放
         function playPreviousSong() {
             // 顺序播放逻辑：索引减1，如果小于0则循环到最后一首
             currentSongIndex--;
@@ -167,7 +172,7 @@ var songs = [
             playSong(songs[currentSongIndex]);
         }
 
-        // 播放下一首 - 修改为顺序播放
+        // 播放下一首 - 顺序播放
         function playNextSong() {
             // 顺序播放逻辑：索引加1，如果超过歌曲列表长度则循环到第一首
             currentSongIndex++;
@@ -197,8 +202,41 @@ var songs = [
             // 设置音频源
             audio.src = song.src;
             
+            // 更新界面显示的歌曲信息
+            songTitle.textContent = song.title;
+            songArtist.textContent = song.artist;
+            
             // 播放音频
             audio.play();
+        }
+
+        // 更新进度条
+        function updateProgress() {
+            const { duration, currentTime } = audio;
+            const progressPercent = (currentTime / duration) * 100;
+            progress.style.width = `${progressPercent}%`;
+            
+            // 更新时间显示
+            currentTimeEl.textContent = formatTime(currentTime);
+            durationEl.textContent = formatTime(duration);
+        }
+
+        // 设置进度
+        function setProgress(e) {
+            const width = this.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            
+            audio.currentTime = (clickX / width) * duration;
+        }
+
+        // 格式化时间
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
         }
 
         // 初始化播放器
@@ -206,8 +244,10 @@ var songs = [
             // 随机选择第一首歌
             playRandomSong();
             
-            // 添加歌曲结束事件监听，自动播放下一首
+            // 添加事件监听器
+            audio.addEventListener('timeupdate', updateProgress);
             audio.addEventListener('ended', playNextSong);
+            progressBar.addEventListener('click', setProgress);
         }
 
         // 页面加载完成后初始化播放器
