@@ -95,94 +95,171 @@
 <body>
     <div class="container">
 
-
-
-        
         <h1>欢迎参观!</h1>
-         
+        
+        <div class="player-container">
+            <!-- 音乐图标 -->
+            <i class="music-icon">🎵</i>
+            
+            <!-- 播放控制 -->
+            <div>
+                <button onclick="playPreviousSong()">前一首</button>
+                <button onclick="playBackgroundMusic()">播放/暂停</button>
+                <button onclick="playNextSong()">后一首</button>
+            </div>
+            
+            <!-- 播放模式显示 -->
+            <div class="play-mode">播放模式：顺序播放（第一首随机）</div>
+        </div>
+        
+        <!-- 背景音乐 -->
+        <audio id="backgroundAudio">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
 
-<!-- 音乐播放器容器 -->
-<div style="text-align: center; margin-top: 20px;">
-    <!-- 音乐图标 -->
-    <i class="fa-solid fa-music fa-2x" style="margin-bottom: 10px;"></i> <!-- Font Awesome 6 使用 solid 前缀，fa-2x 使图标放大2倍 -->
-    
-    <!-- 背景音乐 -->
-    <audio id="backgroundAudio" loop>
-        <source src="See You again.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    
-    <!-- 播放按钮 -->
-    <button onclick="playPreviousSong()">前一首</button>
-    <button onclick="playBackgroundMusic()">播放/暂停</button>
-    <button onclick="playNextSong()">后一首</button>
-</div>
+    <script>
+        // 歌曲列表
+        var songs = [
+            { 
+                src: "See You again.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "心跳.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "爱错.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "其实都没有.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "再见只是陌生人-半吨兄弟.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "十年 - 陈奕迅.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "大城小爱 - 王力宏.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "安和桥-宋冬野.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "心中的日月 - 王力宏.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "改变自己-王力宏.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "消愁-毛不易.320.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "缘分一道桥-王力宏,谭维维.320.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "若是月亮还没来.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "葡萄成熟时 - 陈奕迅.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "需要人陪-王力宏.mp3", 
+                type: "audio/mpeg"
+            },
+            { 
+                src: "林俊杰 - 美人鱼.mp3.mp3", 
+                type: "audio/mpeg"
+            }
+        ];
 
-<script>
+        // 当前歌曲索引
+        var currentSongIndex = 0;
 
-    
-// 歌曲列表
-var songs = [
-    { src: "See You again.mp3", type: "audio/mpeg" },
-    { src: "心跳.mp3", type: "audio/mpeg" },
-    { src: "爱错.mp3", type: "audio/mpeg" },
-    { src: "其实都没有.mp3", type: "audio/mpeg" },
-    { src: "再见只是陌生人-半吨兄弟.mp3", type: "audio/mpeg" },
-    { src: "十年 - 陈奕迅.mp3", type: "audio/mpeg" },
-    { src: "大城小爱 - 王力宏.mp3", type: "audio/mpeg" },
-    { src: "安和桥-宋冬野.mp3", type: "audio/mpeg" },
-    { src: "心中的日月 - 王力宏.mp3", type: "audio/mpeg" },
-    { src: "改变自己-王力宏.mp3", type: "audio/mpeg" },
-    { src: "消愁-毛不易.320.mp3", type: "audio/mpeg" },
-    { src: "缘分一道桥-王力宏,谭维维.320.mp3", type: "audio/mpeg" },
-    { src: "若是月亮还没来.mp3", type: "audio/mpeg" },
-    { src: "葡萄成熟时 - 陈奕迅.mp3", type: "audio/mpeg" },
-    { src: "需要人陪-王力宏.mp3", type: "audio/mpeg" },
-    { src: "林俊杰 - 美人鱼.mp3.mp3", type: "audio/mpeg" },
-];
- 
-// 当前歌曲索引
-var currentSongIndex = 0;
+        // 获取音频元素
+        var audio = document.getElementById('backgroundAudio');
 
-function playBackgroundMusic() {
-    var audio = document.getElementById('backgroundAudio');
-    if (audio.paused) {
-        audio.play();
-    } else {
-        audio.pause();
-    }
-}
+        // 播放/暂停背景音乐
+        function playBackgroundMusic() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
 
-function playPreviousSong() {
-    playRandomSong();
-}
+        // 播放上一首 - 修改为顺序播放
+        function playPreviousSong() {
+            // 顺序播放逻辑：索引减1，如果小于0则循环到最后一首
+            currentSongIndex--;
+            if (currentSongIndex < 0) {
+                currentSongIndex = songs.length - 1;
+            }
+            playSong(songs[currentSongIndex]);
+        }
 
-function playNextSong() {
-    playRandomSong();
-}
+        // 播放下一首 - 修改为顺序播放
+        function playNextSong() {
+            // 顺序播放逻辑：索引加1，如果超过歌曲列表长度则循环到第一首
+            currentSongIndex++;
+            if (currentSongIndex >= songs.length) {
+                currentSongIndex = 0;
+            }
+            playSong(songs[currentSongIndex]);
+        }
 
-function playRandomSong() {
-    var randomIndex;
-    do {
-        randomIndex = Math.floor(Math.random() * songs.length);
-    } while (randomIndex === currentSongIndex);
-    currentSongIndex = randomIndex;
-    playSong(songs[randomIndex]);
-}
+        // 播放随机歌曲（仅用于初始化第一首歌）
+        function playRandomSong() {
+            // 生成随机索引，确保不与当前歌曲相同（虽然初始化时当前索引为0）
+            var randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * songs.length);
+            } while (randomIndex === currentSongIndex);
+            
+            // 更新当前歌曲索引
+            currentSongIndex = randomIndex;
+            
+            // 播放随机选择的歌曲
+            playSong(songs[randomIndex]);
+        }
 
-function playSong(song) {
-    var audio = document.getElementById('backgroundAudio');
-    audio.src = song.src;
-    audio.play();
-}
+        // 播放指定歌曲
+        function playSong(song) {
+            // 设置音频源
+            audio.src = song.src;
+            
+            // 播放音频
+            audio.play();
+        }
 
-// 初始化播放一首歌曲
-window.onload = function() {
-    playRandomSong();
-};
-</script>
+        // 初始化播放器
+        function initPlayer() {
+            // 随机选择第一首歌
+            playRandomSong();
+            
+            // 添加歌曲结束事件监听，自动播放下一首
+            audio.addEventListener('ended', playNextSong);
+        }
 
+        // 页面加载完成后初始化播放器
+        window.onload = initPlayer;
+    </script>
 
+  
 <style>
 button {
     padding: 10px 20px; /* 按钮内边距 */
@@ -238,6 +315,7 @@ button:active {
     
     <h2>获奖荣誉</h2>
 <ul>
+    <li>2024年09月 - （省级）2025“世纪杯”创业竞赛暨“中国国际大学生创新大赛”活动 优胜奖</li>
     <li>2025年09月 - （ICCIR 2025国际会议论文）Optimized design of self-leveling device for 3D printer based on principle of minimum potential energy </li>
     <li>2025年01月 - （证书）金山办公学习证明 </li>
     <li>2024年10月 - （证书）Project Management Essentials Certified (PMEC)™ </li>
