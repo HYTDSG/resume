@@ -148,10 +148,6 @@ var songs = [
         var audio = document.getElementById('backgroundAudio');
         var songTitle = document.getElementById('songTitle');
         var songArtist = document.getElementById('songArtist');
-        var progressBar = document.getElementById('progressBar');
-        var progress = document.getElementById('progress');
-        var currentTimeEl = document.getElementById('currentTime');
-        var durationEl = document.getElementById('duration');
 
         // 播放/暂停背景音乐
         function playBackgroundMusic() {
@@ -210,50 +206,18 @@ var songs = [
             audio.play();
         }
 
-        // 更新进度条
-        function updateProgress() {
-            const { duration, currentTime } = audio;
-            const progressPercent = (currentTime / duration) * 100;
-            progress.style.width = `${progressPercent}%`;
-            
-            // 更新时间显示
-            currentTimeEl.textContent = formatTime(currentTime);
-            durationEl.textContent = formatTime(duration);
-        }
-
-        // 设置进度
-        function setProgress(e) {
-            const width = this.clientWidth;
-            const clickX = e.offsetX;
-            const duration = audio.duration;
-            
-            audio.currentTime = (clickX / width) * duration;
-        }
-
-        // 格式化时间
-        function formatTime(seconds) {
-            if (isNaN(seconds)) return '0:00';
-            
-            const min = Math.floor(seconds / 60);
-            const sec = Math.floor(seconds % 60);
-            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
-        }
-
         // 初始化播放器
         function initPlayer() {
             // 随机选择第一首歌
             playRandomSong();
             
-            // 添加事件监听器
-            audio.addEventListener('timeupdate', updateProgress);
+            // 添加歌曲结束事件监听，自动播放下一首
             audio.addEventListener('ended', playNextSong);
-            progressBar.addEventListener('click', setProgress);
         }
 
         // 页面加载完成后初始化播放器
         window.onload = initPlayer;
     </script>
-
 
 <style>
 button {
