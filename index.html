@@ -141,13 +141,14 @@ var songs = [
     { src: "林俊杰 - 美人鱼.mp3.mp3", type: "audio/mpeg" },
 ];
 
+
+    
+       
         // 当前歌曲索引
         var currentSongIndex = 0;
 
         // 获取音频元素
         var audio = document.getElementById('backgroundAudio');
-        var songTitle = document.getElementById('songTitle');
-        var songArtist = document.getElementById('songArtist');
 
         // 播放/暂停背景音乐
         function playBackgroundMusic() {
@@ -158,7 +159,7 @@ var songs = [
             }
         }
 
-        // 播放上一首 - 顺序播放
+        // 播放上一首 - 修改为顺序播放
         function playPreviousSong() {
             // 顺序播放逻辑：索引减1，如果小于0则循环到最后一首
             currentSongIndex--;
@@ -168,7 +169,7 @@ var songs = [
             playSong(songs[currentSongIndex]);
         }
 
-        // 播放下一首 - 顺序播放
+        // 播放下一首 - 修改为顺序播放
         function playNextSong() {
             // 顺序播放逻辑：索引加1，如果超过歌曲列表长度则循环到第一首
             currentSongIndex++;
@@ -198,10 +199,6 @@ var songs = [
             // 设置音频源
             audio.src = song.src;
             
-            // 更新界面显示的歌曲信息
-            songTitle.textContent = song.title;
-            songArtist.textContent = song.artist;
-            
             // 播放音频
             audio.play();
         }
@@ -218,6 +215,10 @@ var songs = [
         // 页面加载完成后初始化播放器
         window.onload = initPlayer;
     </script>
+
+
+
+        
 
 <style>
 button {
